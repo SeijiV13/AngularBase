@@ -122,6 +122,13 @@ export class DatepickerComponent implements Validator, ControlValueAccessor, Aft
 
           self.value = $(this).val();
         },
+        beforeShow: function(input, inst){
+          var rect = input.getBoundingClientRect();
+          setTimeout(() => {
+          inst.dpDiv.css({ top: rect.left + 40 , left: rect.left + 0  });
+          }, 2)
+          return inst;
+        }
 
       }).addClass('datepicker-on-modal').keypress(function (e) { });
     }
