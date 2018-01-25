@@ -43,6 +43,7 @@ import { CookieModule} from 'ngx-cookie';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { AgmCoreModule } from '@agm/core';
+import { ChartsModule } from 'ng2-charts';
 
 //RESOLVERS
 import { MenuResolver } from './generic/menu.resolver';
@@ -154,7 +155,8 @@ import { TrimmerDirective } from './generic/directives/trimmer.directive';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCG_DEfvNeplEfJBT62WR1a4YwlmipYbUY'
           }),
-        QuillEditorModule
+        QuillEditorModule,
+        ChartsModule
         
       
 
