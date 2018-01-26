@@ -134,5 +134,5 @@ export class WelcomeComponent {
             // Save the PDF
             doc.save('Test.pdf');
         }
-  
+
 }

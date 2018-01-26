@@ -1,10 +1,22 @@
 //VARIABLES
 $fonts: "Lato";
-$global-color: #154C8A;
-$menu-colors: #0054a5;
+$global-color:#03603b;
+$menu-colors: #19491d;
+$menu-border-colors: #074d24;
 $submenu-colors:#1e995d;
 $button: 0px;
-$sidebar-color: #082759;
+$sidebar-color: green;
+$main-submenu-button-color:#00260e;
+$main-submenu-button-hover-color: #2d8954;
+$menu-menu-hover-color:#0f2603;
+$top-nav-color:#535450;
+$btn-primary-color: green;
+$btn-primary-color-hover:#234412;
+$btn-link-color: green;
+$btn-link-color-hover: #234412;
+$table-header-color: #087a3b;
+$loading-animation-color: rgb(54, 52, 52);
+$header-border-color: green;
 //MIXINS
 @import 'mixins';
 
@@ -33,6 +45,27 @@ button {
 }
 button {
     @include border-radius(0px !important);
+}
+.btn-primary{
+    background: $btn-link-color;
+    border: $btn-link-color;
+}
+.btn-primary:hover {
+    background: $btn-primary-color-hover;
+    border: $btn-primary-color-hover;
+}
+.btn-primary:focus {
+    background: $btn-primary-color-hover;
+    border: $btn-primary-color-hover;
+}
+.btn-link{
+    color: $btn-link-color;
+}
+.btn-link:hover{
+    color: $btn-link-color-hover;
+}
+.btn-link:focus{
+    color: $btn-link-color-hover;
 }
 h1 {  @include header-attribute(1.5em,  $global-color, bold);}
 
@@ -145,6 +178,13 @@ ul.pagination>li{
 .pw-passwordMeter-strength4 {@include password-meter-attribute(#9C0, #9C0);}
 .pw-passwordMeter-strength5 {@include password-meter-attribute(#0C0, #0C0);}
 
+.loading-animation{
+    background: $loading-animation-color !important;
+}
+
+.header{
+    border-bottom-color: $header-border-color !important;
+}
 
 //MENU BAR 
 #wrapper {
@@ -188,15 +228,24 @@ ul.pagination>li{
     border-radius: 0px;
     padding: 6px;
     width: 100%;
-    border-color: $menu-colors;
+    border-color: $menu-border-colors;
     border-bottom-color: rgba(256, 256, 256, 0.1) !important;
     border-bottom-width: 2.5px;
     white-space: normal;
     text-align: left;
   
 }
+.main-menu-button:hover{
+   background-color: $menu-menu-hover-color;
+   border-color: $menu-menu-hover-color;
+}
+.main-menu-button:focus{
+    outline: 0;
+    background-color: $menu-menu-hover-color;
+    border-color: $menu-menu-hover-color;
+ }
 .main-submenu-button {
-    @include menu-attribute(#1e305b, #1e305b, #FFFFFF);
+    @include menu-attribute($main-submenu-button-color, $main-submenu-button-color, #FFFFFF);
     border-radius: 0px;
     padding: 6px;
     width: 100%;
@@ -205,7 +254,7 @@ ul.pagination>li{
 }
 
 .main-submenu-button:hover {
-    @include menu-attribute(#3777a8, #3777a8, "");
+    @include menu-attribute($main-submenu-button-hover-color, $main-submenu-button-hover-color, "");
 }
 
 .main-second-submenu-button {
@@ -365,6 +414,10 @@ ul.pagination>li{
     display: inline-block;
     margin: 5px 0;
     font-weight: bold;
+}
+
+.top-nav-title, #top-nav-button{
+    color: $top-nav-color !important;
 }
 
 #top-nav li {
@@ -568,3 +621,9 @@ legend {
 agm-map {
 	height: 300px;
   }
+
+/******************************/
+//GENERIC TABLE
+th{
+    background: $table-header-color;
+}

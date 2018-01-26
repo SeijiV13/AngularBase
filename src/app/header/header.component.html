@@ -8,7 +8,7 @@
         <li *ngIf="forceChange !== 'yes'">
             <div *ngIf="!losUser" class="dropdown" dropdown>
                 <button id="top-nav-button" style="margin-top:9px; margin-right:8px; border-style:none; border-right-style:solid; background-color:transparent;  outline: none !important;
-                        box-shadow: none; color:#337ab7" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                        box-shadow: none; " class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
                     dropdown-open><span class="fa fa-user"></span> {{username}}
                        <span class="caret"></span></button>
                 <ul class="dropdown-menu">
@@ -20,7 +20,7 @@
             </div>
             <div *ngIf="losUser" class="dropdown" dropdown>
                 <button id="top-nav-button" style="margin-top:9px; margin-right:8px; border-style:none; border-right-style:solid; background-color:transparent;  outline: none !important;
-                        box-shadow: none; color:#337ab7" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                        box-shadow: none; color:#333435" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
                     dropdown-open><span class="fa fa-user"></span> {{username}}
                        <span class="caret"></span></button>
             </div>
@@ -29,19 +29,19 @@
 
         <li *ngIf="forceChange !== 'yes'">
             <button id="menu1" class="btn btn-link" (click)="home()" type="button">
-                    <i class="glyphicon glyphicon-home" style="font-size:1.2em"></i>
+                    <i class="glyphicon glyphicon-home top-nav-title" style="font-size:1.2em"></i>
                     <span class="top-nav-title" xlabel="lnkHome" style="font-size:.8em">HOME</span>
                 </button>
         </li>
         <li>
             <button class="btn btn-link">
-                    <i class="glyphicon glyphicon-question-sign"  style="font-size:1.2em"></i>
+                    <i class="glyphicon glyphicon-question-sign top-nav-title"  style="font-size:1.2em"></i>
                     <span class="top-nav-title" xlabel="lnkHelp" style="font-size:.8em">HELP</span>
                 </button>
         </li>
         <li>
             <button (click)="logoutConfirmation.show()" class="btn btn-link">
-                    <i class="glyphicon glyphicon-log-out"  style="font-size:1.2em"></i>
+                    <i class="glyphicon glyphicon-log-out top-nav-title"  style="font-size:1.2em"></i>
                     <span class="top-nav-title" xlabel="lnkLogout" style="font-size:.8em">LOGOUT</span>
                 </button>
         </li>

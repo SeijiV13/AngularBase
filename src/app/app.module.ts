@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { ErrorHandlerModule } from './generic/error-handler/error-handler.module';
 import {DropdownModule} from "ngx-dropdown";
+
 //COMPONENTS
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -44,6 +45,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { AgmCoreModule } from '@agm/core';
 import { ChartsModule } from 'ng2-charts';
+import {NgDashboardModule} from 'ngx-dashboard';
 
 //RESOLVERS
 import { MenuResolver } from './generic/menu.resolver';
@@ -93,6 +95,7 @@ import { TooltipDirective } from 'ng2-tooltip-directive/components'
 import { FormatterDirective } from './generic/directives/formatter.directive';
 import { CharacterLimiterDirective } from './generic/directives/character-limiter.directive';
 import { TrimmerDirective } from './generic/directives/trimmer.directive';
+import { WidgetsComponent } from './generic/widgets/widgets.component';
 
 
 
@@ -128,9 +131,13 @@ import { TrimmerDirective } from './generic/directives/trimmer.directive';
         PrintModalComponent,
         GenericModalComponent,
         GenericTableComponent,
+        WidgetsComponent,
        
 
 
+    ],
+    entryComponents: [
+        WidgetsComponent
     ],
     imports: [
         ProgressHttpModule,
@@ -156,7 +163,8 @@ import { TrimmerDirective } from './generic/directives/trimmer.directive';
             apiKey: 'AIzaSyCG_DEfvNeplEfJBT62WR1a4YwlmipYbUY'
           }),
         QuillEditorModule,
-        ChartsModule
+        ChartsModule,
+        NgDashboardModule
         
       
 
@@ -197,7 +205,8 @@ import { TrimmerDirective } from './generic/directives/trimmer.directive';
         ChangePasswordService,
         PasswordMeterService,
         TableFunctionsService,
-        { provide: APP_INITIALIZER, useFactory: initFactory, deps: [InitService], multi: true,}
+        { provide: APP_INITIALIZER, useFactory: initFactory, deps: [InitService], multi: true,},
+     
     ],
     bootstrap: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]

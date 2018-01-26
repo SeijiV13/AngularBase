@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoadingAnimationComponent implements OnInit {
   @Input() removeLoad: boolean;
   constructor() { }
-
+  
   ngOnInit() {
   }
 
