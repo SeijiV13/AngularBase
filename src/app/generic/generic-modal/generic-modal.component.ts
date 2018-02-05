@@ -17,12 +17,13 @@ export class GenericModalComponent implements AfterViewInit{
   @Input() messageKey: string = "";
   @Output() emitAction = new EventEmitter();
   @ViewChild('genericModal') genericModal: ModalDirective;
- 
+  processButtonCollection: Array<any> = [];
   transactionMessage: string;
   htmlMessage: boolean = false;
 
   constructor(private mes: MessageConfig, private location: Location) { }
   ngAfterViewInit() {
+    this.processButtonCollection;
     this.genericModal.config.backdrop = 'static';
     this.genericModal.config.keyboard = false;
 
@@ -77,14 +78,13 @@ export class GenericModalComponent implements AfterViewInit{
 
   processButtons(){
     if(this.buttons){
-    let proccessButtonCollection = Array<any>();
     for(let button of this.buttons){
       let buttonName = button.buttonName;
       let buttonEmit = button.buttonEmit;
       let buttonType = button.buttonType;
-      proccessButtonCollection.push({buttonName: buttonName, buttonEmit: buttonEmit, buttonType: buttonType})
+      this.processButtonCollection.push({buttonName: buttonName, buttonEmit: buttonEmit, buttonType: buttonType})
     }
-   return proccessButtonCollection;
+   return this.processButtonCollection;
   }
   }
 
