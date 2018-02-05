@@ -55,20 +55,25 @@ export class GenericTableComponent implements OnInit {
 
   processButtonId(){
     let buttonIds = Array<String>();
-    for(let button of this.buttons){
-     if(button.behavior === 'single'){
-       buttonIds.push(button.id);
-     }
+    if(this.buttons){
+      for(let button of this.buttons){
+        if(button.behavior === 'single'){
+          buttonIds.push(button.id);
+        }
+       }
+
     }
     return buttonIds;
   }
   processButtonIdMultiple(){
     let buttonIds = Array<String>();
+    if(this.buttons){
     for(let button of this.buttons){
      if(button.behavior === 'multiple'){
        buttonIds.push(button.id);
      }
     }
+  }
     return buttonIds;
   }
 
