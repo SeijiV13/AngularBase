@@ -6,7 +6,7 @@ import { HttpModule, BaseRequestOptions, RequestOptions, Http } from '@angular/h
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { ErrorHandlerModule } from './generic/error-handler/error-handler.module';
-import {DropdownModule} from "ngx-dropdown";
+import { DropdownModule } from "ngx-dropdown";
 
 //COMPONENTS
 import { AppComponent } from './app.component';
@@ -31,7 +31,7 @@ import { GenericModalComponent } from './generic/generic-modal/generic-modal.com
 import { GenericTableComponent } from './generic/generic-table/generic-table.component';
 
 //APIS
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
 import { TypeaheadModule } from 'ngx-bootstrap';
@@ -40,12 +40,11 @@ import { DataTableModule } from "angular2-datatable";
 import { LoadingAnimationComponent } from './generic/loading-animation/loading-animation.component';
 import { DatepickerComponent } from './generic/datepicker/datepicker.component';
 import { ProgressHttpModule } from "angular-progress-http";
-import { CookieModule} from 'ngx-cookie';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { CookieModule } from 'ngx-cookie';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { AgmCoreModule } from '@agm/core';
 import { ChartsModule } from 'ng2-charts';
-import {NgDashboardModule} from 'ngx-dashboard';
+import { NgDashboardModule } from 'ngx-dashboard';
 
 //RESOLVERS
 import { MenuResolver } from './generic/menu.resolver';
@@ -56,8 +55,8 @@ import { ImprovementResolver } from './generic/resolver/improvement.resolver';
 import { NegativeFactorsResolver } from './generic/resolver/negFactors.resolver';
 import { PositiveFactorsResolver } from './generic/resolver/posFactors.resolver';
 import { WarehouseResolver } from './generic/resolver/warehouse.resolver';
-import { DocumentREResolver} from './generic/resolver/documentRE.resolver';
-import { DocumentMCResolver} from './generic/resolver/documentMC.resolver';
+import { DocumentREResolver } from './generic/resolver/documentRE.resolver';
+import { DocumentMCResolver } from './generic/resolver/documentMC.resolver';
 //ROUTER
 import { ROUTER_PROVIDER } from './routes/main.routes';
 
@@ -88,7 +87,7 @@ import { RecordLockerUrlService } from './generic/services/record-locker-url.ser
 import { SessionService } from './generic/services/session.service';
 import { ChangePasswordService } from './generic/services/change-password.service';
 import { PasswordMeterService } from './generic/services/password-meter.service';
-import { TableFunctionsService} from './generic/services/table-functions.service';
+import { TableFunctionsService } from './generic/services/table-functions.service';
 
 //DIRECTIVES
 import { TooltipDirective } from 'ng2-tooltip-directive/components'
@@ -96,6 +95,7 @@ import { FormatterDirective } from './generic/directives/formatter.directive';
 import { CharacterLimiterDirective } from './generic/directives/character-limiter.directive';
 import { TrimmerDirective } from './generic/directives/trimmer.directive';
 import { WidgetsComponent } from './generic/widgets/widgets.component';
+import { DynamicFormComponent } from './generic/dynamic-form/dynamic-form.component';
 
 
 
@@ -132,7 +132,8 @@ import { WidgetsComponent } from './generic/widgets/widgets.component';
         GenericModalComponent,
         GenericTableComponent,
         WidgetsComponent,
-       
+        DynamicFormComponent,
+
 
 
     ],
@@ -158,19 +159,18 @@ import { WidgetsComponent } from './generic/widgets/widgets.component';
         BrowserAnimationsModule,
         CommonModule,
         DropdownModule,
-        FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCG_DEfvNeplEfJBT62WR1a4YwlmipYbUY'
-          }),
+        }),
         QuillEditorModule,
         ChartsModule,
         NgDashboardModule
-        
-      
+
+
 
     ],
     providers: [
-        { provide: APP_BASE_HREF, useFactory: baseUrl  },
+        { provide: APP_BASE_HREF, useFactory: baseUrl },
         MenuResolver,
         DropdownResolver,
         DocumentREResolver,
@@ -205,8 +205,8 @@ import { WidgetsComponent } from './generic/widgets/widgets.component';
         ChangePasswordService,
         PasswordMeterService,
         TableFunctionsService,
-        { provide: APP_INITIALIZER, useFactory: initFactory, deps: [InitService], multi: true,},
-     
+        { provide: APP_INITIALIZER, useFactory: initFactory, deps: [InitService], multi: true, },
+
     ],
     bootstrap: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
@@ -225,12 +225,12 @@ export function initLoad(mainConfigService) {
     };
 };
 
-export function theFactory(init: InitService){
+export function theFactory(init: InitService) {
     return () => init.load();
 }
 
-export function baseUrl(){   
-    return  "/Appraisal/";
+export function baseUrl() {
+    return "/Appraisal/";
 }
 
 

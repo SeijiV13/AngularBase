@@ -3,7 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 class EnvData {
-   env: string;
+    env: string;
 }
 
 @Injectable()
@@ -20,10 +20,15 @@ export class InitService {
     } */
 
     //VERSION 2
+    private forms: Object = null
     private config: Object = null;
-    private env:    Object = null;
+    private env: Object = null;
 
     constructor(private http: Http) { }
+
+    public getForms(key: any) {
+        return this.forms[key];
+    }
 
     /**
      * Use to get the data found in the second file (config file)
@@ -46,13 +51,13 @@ export class InitService {
      */
     public load() {
         return new Promise((resolve, reject) => {
-            this.http.get('assets/properties/env.json').map( res => res.json() ).catch((error: any):any => {
+            this.http.get('assets/properties/env.json').map(res => res.json()).catch((error: any): any => {
                 console.log('Configuration file "env.json" could not be read');
                 resolve(true);
                 return Observable.throw(error.json().error || 'Server error');
-            }).subscribe( (envResponse:EnvData) => {
+            }).subscribe((envResponse: EnvData) => {
                 this.env = envResponse;
-                let request:any = null;
+                let request: any = null;
 
                 switch (envResponse.env) {
                     case 'production': {
@@ -71,7 +76,7 @@ export class InitService {
 
                 if (request) {
                     request
-                        .map( res => res.json() )
+                        .map(res => res.json())
                         .catch((error: any) => {
                             console.error('Error reading ' + envResponse.env + ' configuration file');
                             resolve(error);
@@ -87,6 +92,19 @@ export class InitService {
                 }
             });
         });
+    }
+
+    public loadForms() {
+        return new Promise((resolve, reject) => {
+            this.http.get('assets/properties/forms.json').map(res => res.json()).catch((error: any): any => {
+                console.log('Configuration file "forms.json" could not be read');
+                resolve(true);
+                return Observable.throw(error.json().error || 'Server error');
+            }).subscribe((formsResponse: EnvData) => {
+                this.forms = formsResponse;
+            });
+        });
+
     }
 
 }

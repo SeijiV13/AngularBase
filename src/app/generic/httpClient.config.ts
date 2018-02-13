@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { Router } from '@angular/router';
 import { MessageConfig } from './message.config';
-import { CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
 import { ProgressHttp } from "angular-progress-http";
 
 import * as $ from "jquery";
@@ -31,7 +31,7 @@ export class HttpClient {
   }
 
   createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', 'Bearer ' + this.cookieService.get('token'));
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     headers.append('Content-Type', 'application/json');
 
     this.allowedTransactions = JSON.parse(localStorage.getItem("allwtrn"));
@@ -53,7 +53,7 @@ export class HttpClient {
       headers: headers
     });
   }
-  
+
 
   postBase(url, data) {
     this.disableButtons();
@@ -89,7 +89,7 @@ export class HttpClient {
     return this.http.delete(this.baseUrl + url, {
       headers: headers,
     });
-  
+
   }
   deleteBaseWithBody(url, body) {
     this.disableButtons();
@@ -99,11 +99,11 @@ export class HttpClient {
       headers: headers,
       body: body
     });
-  
+
   }
 
   get(url, header) {
-    header.append('Authorization', 'Bearer ' + this.cookieService.get('token'));
+    header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(this.baseUrl + url, {
       headers: header
     });
@@ -111,17 +111,17 @@ export class HttpClient {
 
   getDowload(url, header) {
     this.disableButtons();
-    header.append('Authorization', 'Bearer ' + this.cookieService.get('token'));
+    header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(this.baseUrl + url, {
       headers: header,
       responseType: ResponseContentType.Blob
     });
-    
+
   }
- 
+
   getServlet(url) {
-    var header =new Headers();
-    header.append('Authorization', 'Bearer ' + this.cookieService.get('token'));
+    var header = new Headers();
+    header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(this.servletUrl + url, {
       headers: header
     }).map((res) => new Blob([res.blob()]));;
@@ -163,18 +163,18 @@ export class HttpClient {
     return response.json();
   }
 
-  handleDocumentMap(response: Response){
+  handleDocumentMap(response: Response) {
     $('button').removeAttr('disabled');
     $("input.checkbox").not(".checkbox-inquire").removeAttr('disabled');
     return response;
   }
 
-  handleMapImage(response: Response){
+  handleMapImage(response: Response) {
     $('button').removeAttr('disabled');
     $("input.checkbox").not(".checkbox-inquire").removeAttr('disabled');
-    return new Blob([response.blob()], { type: response.blob().type})
+    return new Blob([response.blob()], { type: response.blob().type })
   }
-  
+
 
   handleError(error: any) {
     $('button').removeAttr('disabled');
@@ -198,9 +198,11 @@ export class HttpClient {
 
   //GENERIC JQUERY FUNCTIONS
   public disableButtons() { $('button').attr('disabled', 'disabled'); $("input.checkbox").prop("disabled", true); }
-  public fadeBody() { $("body").fadeOut()}
-  public disableBackTrack(enable: boolean) { if(enable){window.history.pushState(null, "", window.location.href); window.onpopstate = function () { window.history.pushState(null, "", window.location.href); };
-  
+  public fadeBody() { $("body").fadeOut() }
+  public disableBackTrack(enable: boolean) {
+    if (enable) {
+      window.history.pushState(null, "", window.location.href); window.onpopstate = function () { window.history.pushState(null, "", window.location.href); };
+
     }
   }
 }

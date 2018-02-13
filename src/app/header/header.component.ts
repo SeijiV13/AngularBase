@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticateService } from "../login/loginService/authenticate.service";
 import { SessionTimeoutModalComponent } from '../generic/session-timeout-modal/session-timeout-modal.component';
 import { SessionService } from '../generic/services/session.service';
-import { CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
 import { ModalDirective } from 'ngx-bootstrap';
 import { DataPasserService } from '../generic/services/data-passer.service';
 import { DropdownService } from '../generic/services/dropdown.service';
@@ -38,16 +38,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 		public elementRef: ElementRef,
 		public dataPasserService: DataPasserService,
 		private dropdownService: DropdownService,
-	    private cookieService: CookieService) {
+		private cookieService: CookieService) {
 		setInterval(() => {
 			this.dateToday = new Date();
 		}, 1000);
 
 		this.initSessionVariables();
 	}
-    ngAfterViewInit(){
-		if(localStorage.getItem('losJson') ||
-			localStorage.getItem('ropaJson')){
+	ngAfterViewInit() {
+		if (localStorage.getItem('losJson') ||
+			localStorage.getItem('ropaJson')) {
 			this.losUser = true;
 
 		}
@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 		this.pressedLogOut = true;
 		this.authenticate.logout().subscribe(
 			(data) => {
-				this.cookieService.remove("token");
+				localStorage.removeItem("token");
 			}, (error) => {/**console.log(error.text());**/ },
 			() => { window.location.replace('/Appraisal'); }
 		);
@@ -143,31 +143,31 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 	refreshJWT() {
 		this.sessionService.refreshJWT().subscribe((data) => {
 			//console.log(data);
-			this.cookieService.remove("token");
-			this.cookieService.put("token", data.jwt);
+			localStorage.removeItem("token");
+			localStorage.setItem("token", data.jwt);
 		});
 	}
 
 	home() {
-		if(this.dataPasserService.withFormChanges){
+		if (this.dataPasserService.withFormChanges) {
 			this.dataPasserService.sendPath("/home");
-		}else{
+		} else {
 			this.router.navigate(['/home']);
 		}
-		
+
 	}
 
-	changePassword(){
-		if(this.dataPasserService.withFormChanges){
+	changePassword() {
+		if (this.dataPasserService.withFormChanges) {
 			this.dataPasserService.sendPath("/home/changePassword");
-		}else{
+		} else {
 			this.router.navigate(['/home/changePassword']);
 		}
 	}
-	securityQuestion(){
-		if(this.dataPasserService.withFormChanges){
+	securityQuestion() {
+		if (this.dataPasserService.withFormChanges) {
 			this.dataPasserService.sendPath("/home/securityQuestion");
-		}else{
+		} else {
 			this.router.navigate(['/home/securityQuestion']);
 		}
 	}

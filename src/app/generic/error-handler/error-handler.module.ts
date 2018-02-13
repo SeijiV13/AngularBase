@@ -1,5 +1,5 @@
 import { ErrorHandler, NgModule, Injectable, Injector } from '@angular/core';
-import { CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
 import { MessageConfig } from "../message.config";
 @Injectable()
@@ -21,7 +21,7 @@ export class CustomErrorHandler extends ErrorHandler {
     if (error && error.type == "ERROR") {
       localStorage.setItem("errorMessage", error.message);
     }
-    if (this.cookieService && this.cookieService.get("token")) this.router.navigate(['/home/error']);
+    if (localStorage.getItem("token")) this.router.navigate(['/home/error']);
     else this.router.navigate(['/error']);
 
     /*else if(localStorage.getItem("errorMessage")){

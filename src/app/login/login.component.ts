@@ -8,7 +8,7 @@ import { DataPasserService } from '../generic/services/data-passer.service';
 import { FormErrorHandlerService } from '../generic/services/form-error-handler.service';
 import { MessageConfig } from '../generic/message.config';
 import { UserDetailsService } from '../generic/services/user-details.service';
-import { CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
 import { ChangePasswordService } from '../generic/services/change-password.service';
 import { InitService } from '../generic/init.config';
 import * as $ from 'jquery';
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private changePassword: ChangePasswordService,
         private cookieService: CookieService) {
-        this.cookieService.removeAll();
+        localStorage.clear();
         setTimeout(() => { this.errMes = <MessageConfig>this.injector.get(MessageConfig); }, 500);
         this.loginForm = this.formBuilder.group({
             username: ['', [Validators.required]],
@@ -74,12 +74,12 @@ export class LoginComponent implements OnInit {
                 this.losLogin();
                 if (params['losType'])
                     this.losParameter(params);
-            }else if (params['ropaUrl']) {
+            } else if (params['ropaUrl']) {
                 this.showDiv = false;
                 this.ropaLogin();
                 if (params['ropaType'])
                     this.ropaParameter(params);
-            }else {
+            } else {
                 this.showDiv = true;
             }
         });
@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
         this.loginPressed = false;
         this.authenticate.remoteLogout(this.usrid).subscribe(
             (data) => {
-                this.cookieService.remove("token");
+                localStorage.removeItem("token");
                 this.errorMessage = "";
             }, (error) => { }
         );
@@ -180,7 +180,7 @@ export class LoginComponent implements OnInit {
 
 
                     //get user details
-                    this.cookieService.put("token", data.jwt);
+                    localStorage.setItem("token", data.jwt);
                     this.dropdownService.getTransactionList().subscribe((data) => {
                         localStorage.setItem('allwtrn', JSON.stringify(data));
                     });
@@ -226,7 +226,7 @@ export class LoginComponent implements OnInit {
                                 sessionStorage.setItem('seqNoAnswerLogin', data['seqNo']);
                                 sessionStorage.setItem('questionToAnswerLogin', data['qstn']);
                                 this.questionIsActive = true;
-    
+
                                 if (data['qstn']) {
                                     this.questionIsActive = true;
                                     localStorage.setItem('questionIsActive', "yes");
@@ -235,7 +235,7 @@ export class LoginComponent implements OnInit {
                                     this.loginSuccess = true;
                                     $("#wrapper").removeClass("toggled");
                                 }
-                                else{
+                                else {
                                     this.questionIsActive = false
                                     localStorage.setItem('questionIsActive', "no");
                                 }
@@ -259,29 +259,29 @@ export class LoginComponent implements OnInit {
                             if (localStorage.getItem('losJson')) {
                                 this.dataPasserService.losJsonParam = true;
                                 let type = JSON.parse(localStorage.getItem("losJson")).losType;
-                                if(type == "APR005"){
+                                if (type == "APR005") {
                                     this.router.navigate(['/home/appraisalRequestMaintenanceMotor']);
-                                }else{
+                                } else {
                                     this.router.navigate(['/home/appraisalRequestMaintenanceRE']);
                                 }
                                 return;
-                            }else if (localStorage.getItem('ropaJson')) {
+                            } else if (localStorage.getItem('ropaJson')) {
                                 this.dataPasserService.ropaJsonParam = true;
                                 sessionStorage.setItem('ropaJson', localStorage.getItem('ropaJson'));
                                 let type = JSON.parse(localStorage.getItem("ropaJson")).ropaType;
-                                if(type == "APR030"){
+                                if (type == "APR030") {
                                     this.router.navigate(['/home/appRepMaintBasic']);
-                                }else if(type == "APR003"){
+                                } else if (type == "APR003") {
                                     this.router.navigate(['/home/motorRepMaintBasic']);
                                 }
                             }
                             if (data.passWarn) {
                                 localStorage.setItem("passWarn", data.passWarn);
                             }
-                            if ( localStorage.getItem('questionIsActive') !== 'yes'
-                                    && !localStorage.getItem('losJson') 
-                                    && !localStorage.getItem('ropaJson')) {
-                                      
+                            if (localStorage.getItem('questionIsActive') !== 'yes'
+                                && !localStorage.getItem('losJson')
+                                && !localStorage.getItem('ropaJson')) {
+
                                 this.router.navigate(['/home/createRequestRE']);
                             }
                         }
@@ -314,7 +314,7 @@ export class LoginComponent implements OnInit {
         this.showLoading = false;
         this.authenticate.logout().subscribe(
             (data) => {
-                this.cookieService.remove("token");
+                localStorage.removeItem("token");
                 $("#wrapper").addClass("toggled");
                 // $(".form-login").removeClass("fade-login");
                 // $(".information-section").removeClass("fade-login");

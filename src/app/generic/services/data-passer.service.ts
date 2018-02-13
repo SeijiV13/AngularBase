@@ -2,7 +2,7 @@
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 export class DataPasserService {
-    
+
     public selectedData: any;
     public multipleSelectedData: Array<any> = [];
     changeTitleEmitter = new EventEmitter();
@@ -11,16 +11,19 @@ export class DataPasserService {
     sendPageTitle(data: string) {
         this.changeTitleEmitter.emit(data);
     }
-    sendPath(path){
+    sendPath(path) {
         this.pathForRedirect.emit(path);
     }
     public withFormChanges: boolean;
     public fileLinks: any[] = [];
     public losJsonParam: boolean = false;
-    public ropaJsonParam: boolean  = false;
+    public ropaJsonParam: boolean = false;
     public multipleSelectedRequest: any[] = [];
     public pageTitle: string = '';
 
+
+    //dropdown
+    reviewers: any;
 
     //user details
     public rcbcInd: string;

@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
 
 import * as $ from 'jquery';
 
-@Component({ 
+@Component({
     selector: 'home',
     templateUrl: './home.component.html',
     providers: [AuthenticateService]
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, AfterViewInit {
     forceChange = localStorage.getItem('changePasswordWQuestion');
     currentLocation;
     @ViewChild('menuView') menuView: MenuViewComponent;
-  
+
 
     constructor(
         private authenticate: AuthenticateService,
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, AfterViewInit {
         private loc: Location) {
         //for force change of title
         this.dataPasserService.changeTitleEmitter.subscribe((data) => {
-           // console.log(data);
+            // console.log(data);
             this.pageTitle = data;
         })
         this.router.events.subscribe((val) => {
@@ -97,17 +97,18 @@ export class HomeComponent implements OnInit, AfterViewChecked, AfterViewInit {
     ngAfterViewInit() {
         //disable menu1
         if (localStorage.getItem("passWarn")) {
-            if(parseInt(localStorage.getItem("passWarn")) >= 1){
-            let message = "Your password will expire in " + localStorage.getItem("passWarn") + " day(s)";
-            //this.passwordWarningModal.showWithCustomMessage(message);
+            if (parseInt(localStorage.getItem("passWarn")) >= 1) {
+                let message = "Your password will expire in " + localStorage.getItem("passWarn") + " day(s)";
+                //this.passwordWarningModal.showWithCustomMessage(message);
             }
             localStorage.removeItem("passWarn");
         }
-     
+
     }
 
 
     initDropdownValues(data) {
+        this.dataPasserService.reviewers = data.reviewer;
         sessionStorage.setItem('regDeeds', JSON.stringify(data['regDeeds']));
         sessionStorage.setItem('clearingInds', JSON.stringify(data['clearingInd']));
         sessionStorage.setItem('tvrStatuses', JSON.stringify(data['tvrStatus'].TVR_STATUS));
@@ -134,7 +135,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, AfterViewInit {
         sessionStorage.setItem('requestors', JSON.stringify(data.requestor));
         let losJson = JSON.parse(localStorage.getItem('losJson'));
 
-        if(losJson){ // && losJson.losType == "APR041"
+        if (losJson) { // && losJson.losType == "APR041"
 
             let requestedByArray = data.requestor;
             let exist: boolean = false;
@@ -194,7 +195,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, AfterViewInit {
         sessionStorage.setItem('improvementRooms', JSON.stringify(improvements.characteristics.rooms));
         sessionStorage.setItem('improvementContructions', JSON.stringify(improvements.contructions));
         sessionStorage.setItem('improvementProgress', JSON.stringify(improvements.progress));
-        
+
         let REDocuments = this.route.snapshot.data['REDocuments'];
         let MCDocuments = this.route.snapshot.data['MCDocuments'];
         sessionStorage.setItem('REdocuments', JSON.stringify(REDocuments));

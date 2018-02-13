@@ -1,0 +1,91 @@
+<form class="row form-horizontal">
+  <div [formGroup]="createdGroup">
+    <div *ngFor="let field of fields; let i= index;">
+      <div class="row-field">
+        <div *ngIf="field.type == 'text'" class="form-group">
+          <label class="control-label col-sm-3 col-md-4" for="field.controlname">{{field.label}}</label>
+          <div class="col-sm-9 col-md-8 field">
+            <input [formControlName]="field.controlname" type="text" [class]="field.class" [placeholder]="field.placeholder">
+            <control-messages [control]="createdGroup.controls[field.controlname]"></control-messages>
+          </div>
+        </div>
+        <div *ngIf="field.type == 'textarea'" class="form-group">
+          <label class="control-label col-sm-3 col-md-4" for="field.controlname">{{field.label}}</label>
+          <div class="col-sm-9 col-md-8 ">
+            <textarea [formControlName]="field.controlname" [class]="field.class" [placeholder]="field.placeholder">
+              </textarea>
+            <control-messages [control]="createdGroup.controls[field.controlname]"></control-messages>
+          </div>
+        </div>
+        <div *ngIf="field.type == 'select'" class="form-group">
+          <label class="control-label col-sm-3 col-md-4" for="propRefNo">{{field.label}}</label>
+          <div class="col-sm-9 col-md-8 field">
+            <select *ngIf="field.values" [formControlName]="field.controlname" type="text" [class]="field.class">
+              <option *ngFor="let value of field.values" [value]="value.value">{{value.label}}</option>
+            </select>
+            <select *ngIf="!field.values" [formControlName]="field.controlname" type="text" [class]="field.class">
+              <option *ngFor="let value of dataPasserService[field.refvalue]" [value]="value.value">{{value.label}}</option>
+            </select>
+            <control-messages [control]="createdGroup.controls[field.controlname]"></control-messages>
+          </div>
+        </div>
+        <div *ngIf="field.type == 'radio'" class="form-group">
+          <label class="control-label col-sm-3 col-md-4" for="field.controlname">{{field.label}}</label>
+          <div class="col-sm-9 col-md-8 field">
+            <label *ngIf="field.values">
+              <ng-container *ngFor="let value of field.values">
+                <label>
+                  <input [formControlName]="field.controlname" type="radio" [value]="value.value" [class]="field.class"> {{value.label}}
+                </label>
+              </ng-container>
+            </label>
+            <label *ngIf="!field.values">
+              <ng-container *ngFor="let value of field.values">
+                <label>
+                  <input [formControlName]="field.controlname" type="radio" *ngFor="let value of dataPasserService[field.refvalue]" [value]="value.value"
+                    [class]="field.class"> {{value.label}}
+                </label>
+              </ng-container>
+            </label>
+            <control-messages [control]="createdGroup.controls[field.controlname]"></control-messages>
+          </div>
+        </div>
+        <div *ngIf="field.type == 'daterange'" class="form-group">
+          <label class="control-label col-sm-3 col-md-4" for="field.dateOneControlName">{{field.label}}</label>
+          <div class="cols-sm-3 col-md-8 field">
+            <div class="date-field1">
+              <datepicker [validations]="field.validations ? field.validations : []" [maximumDate]="field.dateOneMaxDate ? field.dateOneMaxDate : ''"
+                [minimumDate]="field.dateOneMinDate ? field.dateOneMinDate: ''" [id]="field.dateOneId" [formControlName]="field.dateOneControlName"
+                [placeholder]="field.dateOnePlaceholder ? field.dateOnePlaceholder : ''"></datepicker>
+              <div class="help-block">From</div>
+              <control-messages [control]="createdGroup.controls[field.dateOneControlName]"></control-messages>
+            </div>
+
+            <div class="date-field2">
+              <datepicker [validations]="field.validations ? field.validations : []" [maxaimumDate]="field.dateTwoMaxDate ? field.dateTwoMaxDate : ''"
+                [minimumDate]="field.dateTwoMinDate ? field.dateTwoMinDate: ''" [id]="field.dateTwoId" [formControlName]="field.dateTwoControlName"
+                [placeholder]="field.dateTwoPlaceholder? field.dateTwoPlaceholder: ''"></datepicker>
+              <div class="help-block">To</div>
+              <control-messages [control]="createdGroup.controls[field.dateTwoControlName]"></control-messages>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="field.type == 'date'" class="form-group">
+          <label class="control-label col-sm-3 col-md-4" for="field.controlname">{{field.label}}</label>
+          <div class="cols-sm-3 col-md-8 field">
+            <datepicker [validations]="field.validations ? field.validations : []" [maximumDate]="field.maxDate ? field.maxDate : ''"
+              [minimumDate]="field.minDate ? field.minDate : ''" [id]="field.id" [formControlName]="field.controlname" [placeholder]="field.placeholder? field.placeholder: ''"></datepicker>
+            <control-messages [control]="createdGroup.controls[field.controlname]"></control-messages>
+
+          </div>
+        </div>
+      </div>
+      <div *ngIf="field.type == 'formgroup'">
+        <dynamic-form [form]='field' [child]="true" [parentGroup]="createdGroup"></dynamic-form>
+      </div>
+    </div>
+
+  </div>
+
+  <button *ngIf="!child" (click)="submitForm()">Submit</button>
+</form>

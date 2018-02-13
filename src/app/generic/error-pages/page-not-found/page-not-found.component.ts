@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
 import { HeaderComponent } from '../../../header/header.component';
-import { Router} from "@angular/router";
+import { Router } from "@angular/router";
 @Component({
   selector: 'page-not-found',
   templateUrl: './page-not-found.component.html',
@@ -12,12 +12,12 @@ import { Router} from "@angular/router";
 export class PageNotFoundComponent implements OnInit {
   nextPageInd: string = "Login";
   constructor(private header: HeaderComponent, private cookieService: CookieService, private router: Router) {
-    if (this.cookieService && this.cookieService.get("token")) this.nextPageInd = "Home";
+    if (localStorage.getItem("token")) this.nextPageInd = "Home";
     else this.nextPageInd = "Login";
   }
 
-  backToLogin(){
-   this.router.navigate(['/Appraisal']);
+  backToLogin() {
+    this.router.navigate(['/Appraisal']);
   }
 
   ngOnInit() {

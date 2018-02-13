@@ -1,0 +1,74 @@
+{
+    "formGroup1": {
+        "columns": "2",
+        "fields": [
+            {
+                "controlname": "field1",
+                "class": "form-control",
+                "label": "Text Field",
+                "type": "text",
+                "placeholder": "Field 1",
+                "value": "",
+                "validations": [
+                    "requiredValidator"
+                ]
+            },
+            {
+                "controlname": "field2",
+                "class": "form-control",
+                "label": "Select Field",
+                "type": "select",
+                "refvalue": "reviewers"
+            },
+            {
+                "controlname": "field3",
+                "label": "Radio Field",
+                "type": "radio",
+                "values": [
+                    {
+                        "label": "Yes",
+                        "value": "Y"
+                    },
+                    {
+                        "label": "No",
+                        "value": "N"
+                    }
+                ]
+            },
+            {
+                "label": "Date Range Field",
+                "type": "daterange",
+                "dateOneControlName": "range1",
+                "dateTwoControlName": "range2",
+                "dateOneId": "range1",
+                "dateTwoId": "range2",
+                "dateOnePlaceholder": "MM/DD/YYY",
+                "dateTwoPlaceholder": "MM/DD/YY",
+                "dateOneMaxDate": "today",
+                "dateOneMinDate": "today",
+                "dateTwoMinDate": "today",
+                "dateTwoMaxDate": ""
+            },
+            {
+                "controlname": "field5",
+                "label": "Date Field",
+                "type": "date",
+                "id": "field5",
+                "placeholder": "MM/DD/YYY",
+                "maxDate": "today",
+                "minDate": "",
+                "columns": "12",
+                "validations": [
+                    "requiredValidator"
+                ]
+            },
+            {
+                "controlname": "field6",
+                "label": "Textarea Field",
+                "type": "textarea",
+                "placeholder": "Text Area",
+                "class": "form-control"
+            }
+        ]
+    }
+}
